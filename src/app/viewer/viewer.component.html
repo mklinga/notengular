@@ -1,2 +1,10 @@
-<h6>{{ noteId | async }}</h6>
-<p>{{ note | async }}</p>
+<div class='app-viewer'>
+  <app-note-list [notes]="allNotes" (selectNote)="onSelectNote($event)"></app-note-list>
+  <div class='app-viewer-selected-note' *ngIf="!loadingNode && selectedNote; else loader">{{ selectedNote.content }}</div>
+</div>
+
+<ng-template #loader>
+  <div class='loader'>
+    Loading...
+  </div>
+</ng-template>

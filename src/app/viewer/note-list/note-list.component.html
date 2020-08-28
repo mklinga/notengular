@@ -1,0 +1,3 @@
+<ul>
+  <li *ngFor="let note of notes" (click)="selectNote.emit(note.id)">{{ note.title }}</li>
+</ul>

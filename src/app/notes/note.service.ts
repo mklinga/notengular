@@ -1,19 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, empty } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
+import { Note } from '../models/Note';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NoteService {
 
+  allNotes: Note[] = [
+      { id: '1', title: 'First', content: 'First note' },
+      { id: '2', title: '#2', content: 'Second note. This one has an exclamation mark!' },
+      { id: '3', title: '3rdth', content: 'Third, maybe the greatest note' },
+  ];
+
   constructor() { }
 
-  getAllNoteIds(): Observable<Array<string>> {
-    return of(['abc']).pipe(delay(1000));
+  getAllNotes(): Observable<Note[]> {
+    return of(this.allNotes).pipe(delay(100));
   }
 
-  fetchNote(noteId: string): Observable<string> {
-    return of(`note ${noteId}`).pipe(delay(500));
+  fetchNote(noteId: string): Observable<Note> {
+    const note = this.allNotes.find(({ id }) => id === noteId);
+
+    if (!note) {
+      return empty();
+    }
+    return of(note).pipe(delay(500));
   }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NoteService } from '../notes/note.service';
-import { Observable, of } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { Note } from '../models/Note';
+import { first } from 'rxjs/operators';
 import { head } from '../utils/fn';
 
 @Component({
@@ -12,20 +12,30 @@ import { head } from '../utils/fn';
 })
 export class ViewerComponent implements OnInit {
 
-  loading: boolean;
-  noteId: Observable<string>;
-  note: Observable<string>;
+  loadingNode: boolean;
+  allNotes: Note[];
+  selectedNoteId: string;
+  selectedNote: Note;
 
-  constructor(private route: ActivatedRoute, private noteService: NoteService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private noteService: NoteService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.noteId = (params.noteId)
-        ? of(params.noteId)
-        : this.noteService.getAllNoteIds().pipe(map(head));
+      this.noteService.getAllNotes().subscribe(notes => {
+        this.allNotes = notes;
 
-      this.note = this.noteId.pipe(
-        flatMap(id => this.noteService.fetchNote(id)));
+        this.selectedNoteId = params.noteId || head(notes).id;
+
+        this.loadingNode = true;
+        this.noteService.fetchNote(this.selectedNoteId).pipe(first()).subscribe(note => {
+          this.selectedNote = note;
+          this.loadingNode = false;
+        });
+      });
     });
+  }
+
+  onSelectNote(nextNoteId: string): void {
+    this.router.navigate(['/notes', { noteId: nextNoteId }]);
   }
 }

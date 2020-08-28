@@ -1,0 +1,15 @@
+ul {
+  margin: 0;
+  list-style: none;
+  padding: 5px;
+
+  li {
+    width: 250px;
+    background: #eaeaea;
+    padding: 15px;
+  }
+
+  li:nth-of-type(even) {
+    background: #f0f0f0;
+  }
+}

@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewerComponent } from './viewer/viewer.component';
+import { NoteListComponent } from './viewer/note-list/note-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    ViewerComponent
+    ViewerComponent,
+    NoteListComponent
   ],
   imports: [
     BrowserModule,
