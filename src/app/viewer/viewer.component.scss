@@ -1,8 +1,22 @@
 .app-viewer {
   display: flex;
   padding: 5px;
+  height: 100%;
 
   .app-viewer-selected-note {
     padding: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .editor, .viewer {
+      flex: 1;
+      padding-top: 15px;
+
+      textarea {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }

@@ -1,0 +1,13 @@
+.app-viewer-view-mode-toolbar {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+
+  button {
+    background: none;
+    border: 1px solid transparent;
+
+    &.selected {
+      color: var(--primary-color);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<div class="app-viewer-view-mode-toolbar">
+  <button
+    [class.selected]="viewMode === viewModeOptions.VIEW"
+    (click)="setMode('view')"
+  >
+    View
+  </button>
+  <button
+    [class.selected]="viewMode === viewModeOptions.EDIT"
+    (click)="setMode('edit')"
+  >
+    Edit
+  </button>
+</div>

@@ -4,9 +4,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewerComponent } from './viewer/viewer.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
   { path: 'notes', component: ViewerComponent },
   { path: 'notes/:noteId', component: ViewerComponent },
+  { path: '', redirectTo: '/notes', pathMatch: 'full' }
 ];
 
 @NgModule({

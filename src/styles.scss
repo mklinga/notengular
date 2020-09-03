@@ -5,6 +5,23 @@
   font-family: sans-serif;
 }
 
+body {
+  height: 100vh;
+  margin: 0;
+  
+  --primary-color: #41b4b5;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+app-viewer {
+  flex: 1;
+}
+
 h1 {
   text-align: center;
   font-weight: 400;

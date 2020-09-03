@@ -4,6 +4,7 @@ import { NoteService } from '../notes/note.service';
 import { Note } from '../models/Note';
 import { first } from 'rxjs/operators';
 import { head } from '../utils/fn';
+import { ViewMode } from '../types';
 
 @Component({
   selector: 'app-viewer',
@@ -16,6 +17,9 @@ export class ViewerComponent implements OnInit {
   allNotes: Note[];
   selectedNoteId: string;
   selectedNote: Note;
+  currentViewMode = ViewMode.VIEW;
+
+  viewModeOptions = ViewMode;
 
   constructor(private route: ActivatedRoute, private router: Router, private noteService: NoteService) { }
 
@@ -37,5 +41,9 @@ export class ViewerComponent implements OnInit {
 
   onSelectNote(nextNoteId: string): void {
     this.router.navigate(['/notes', { noteId: nextNoteId }]);
+  }
+
+  setViewMode(viewMode: ViewMode): void {
+    this.currentViewMode = viewMode;
   }
 }

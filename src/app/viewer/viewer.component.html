@@ -1,7 +1,16 @@
 <div class='app-viewer'>
   <app-note-list [notes]="allNotes" (selectNote)="onSelectNote($event)"></app-note-list>
-  <div class='app-viewer-selected-note' *ngIf="!loadingNode && selectedNote; else loader">{{ selectedNote.content }}</div>
+  <div class='app-viewer-selected-note' *ngIf="!loadingNode && selectedNote; else loader">
+    <app-view-mode-toolbar [viewMode]="currentViewMode" (setViewMode)="setViewMode($event)"></app-view-mode-toolbar>
+    <div class="editor" *ngIf="currentViewMode === viewModeOptions.EDIT; else markup">
+      <textarea [value]="selectedNote.content"></textarea>
+    </div>
+  </div>
 </div>
+
+<ng-template #markup>
+  <div class="viewer">{{ selectedNote.content }}</div>
+</ng-template>
 
 <ng-template #loader>
   <div class='loader'>

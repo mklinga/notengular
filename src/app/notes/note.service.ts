@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, empty } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
 import { Note } from '../models/Note';
 
 @Injectable({
@@ -17,7 +16,7 @@ export class NoteService {
   constructor() { }
 
   getAllNotes(): Observable<Note[]> {
-    return of(this.allNotes).pipe(delay(100));
+    return of(this.allNotes);
   }
 
   fetchNote(noteId: string): Observable<Note> {
@@ -26,6 +25,6 @@ export class NoteService {
     if (!note) {
       return empty();
     }
-    return of(note).pipe(delay(500));
+    return of(note);
   }
 }
